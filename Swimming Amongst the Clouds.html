@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fish in the Sky</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("Swimming Amongst the Clouds.png") no-repeat center center;
+      background-size: cover;
+      font-family: sans-serif;
+    }
+
+    /* Hint text */
+    .hint {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.7);
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 3vh;
+    }
+
+    /* Clickable area over the left fish */
+    .fish-hotspot {
+      position: absolute;
+      margin-top: 40vh;
+      margin-left: 12vw;
+      width: 20vw;
+      height: 30vh;
+      cursor: pointer;
+      /* background: rgba(0,0,0,0.6); */ /* uncomment to see area */
+    }
+
+    /* pop-up styles */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      padding-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="hint">Click on the left fish!</div>
+
+  <!-- Hotspot -->
+  <div class="fish-hotspot" id="openModal"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="svgModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <object data="Swimming Amongst the Clouds.svg" type="image/svg+xml" width="600"></object>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById("openModal");
+    const modal = document.getElementById("svgModal");
+    const closeBtn = document.getElementById("closeModal");
+
+    openBtn.onclick = () => modal.classList.add("show");
+    closeBtn.onclick = () => modal.classList.remove("show");
+    modal.onclick = (e) => { if (e.target === modal) modal.classList.remove("show"); };
+  </script>
+</body>
+</html>
